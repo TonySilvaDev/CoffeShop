@@ -1,29 +1,29 @@
-﻿using CoffeShop.Models.Interfaces;
+﻿using CoffeShop.Data;
+using CoffeShop.Models.Interfaces;
 
 namespace CoffeShop.Models.Services
 {
     public class ProductRepository : IProductRepository
     {
-        private List<Product> ProductList = new List<Product>()
+        private CoffeShopDbContext dbContext;
+        public ProductRepository(CoffeShopDbContext dbContext)
         {
-            new Product{Id = 1, Name = "Americano", Price = 25, Detail = "The Americano cofee is a classic expresso-based drink", ImageUrl = "https://chilpa.mx/wp-content/uploads/2021/10/cafe_americano.jpg"},
-            new Product{Id = 2, Name = "Mocha", Price = 30, Detail = "The Americano cofee is a classic expresso-based drink", ImageUrl = "https://chilpa.mx/wp-content/uploads/2021/10/cafe_americano.jpg"},
-            new Product{Id = 3, Name = "Cafe au lait", Price = 35, Detail = "The Americano cofee is a classic expresso-based drink", ImageUrl = "https://chilpa.mx/wp-content/uploads/2021/10/cafe_americano.jpg"}
-        };
+            this.dbContext = dbContext;
+        }
 
         public IEnumerable<Product> GetAllProducts()
         {
-            return ProductList;
+            return dbContext.Products;
         }
 
-        public Product GetProductDetail(int id)
+        public Product? GetProductDetail(int id)
         {
-            return ProductList.FirstOrDefault(p => p.Id == id);
+            return dbContext.Products.FirstOrDefault(p => p.Id == id);
         }
 
         public IEnumerable<Product> GetTrendingProducts()
         {
-            return ProductList.Where(p => p.IsTrendingProduct);
+            return dbContext.Products.Where(p => p.IsTrendingProduct);
         }
     }
 }
