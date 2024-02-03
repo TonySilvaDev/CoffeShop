@@ -1,12 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoffeShop.Models.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private IProductRepository productRepository;
+        public HomeController(IProductRepository productRepository)
         {
-            return View();
+            this.productRepository = productRepository;
+        }
+
+        public IActionResult Index()
+        {            
+            return View(productRepository.GetTrendingProducts());
         }
     }
 }
