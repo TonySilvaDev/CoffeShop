@@ -27,6 +27,8 @@ namespace CoffeShop.Controllers
             if(product != null)
             {
                 shoppingCartRepository.AddToCart(product);
+                var cartCount = shoppingCartRepository.GetShoppingCartItems().Count();
+                HttpContext.Session.SetInt32("CartCount", cartCount);
             }
 
             return RedirectToAction("Index");
@@ -38,6 +40,8 @@ namespace CoffeShop.Controllers
             if (product != null)
             {
                 shoppingCartRepository.RemoveFromCart(product);
+                var cartCount = shoppingCartRepository.GetShoppingCartItems().Count();
+                HttpContext.Session.SetInt32("CartCount", cartCount);
             }
 
             return RedirectToAction("Index");
