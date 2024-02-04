@@ -17,6 +17,7 @@ namespace CoffeShop.Controllers
         {
             var items = shoppingCartRepository.GetShoppingCartItems();
             shoppingCartRepository.ShoppingCartItems = items;
+            ViewBag.CartTotal = shoppingCartRepository.GetShoppingCartTotal();
             return View(items);
         }
 
