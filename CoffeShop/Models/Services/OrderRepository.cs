@@ -22,7 +22,7 @@ namespace CoffeShop.Models.Services
                 var orderDetail = new OrderDetail
                 {
                     Quantiy = item.Qty,
-                    Product = item.Product,
+                    ProductId = item.Product.Id,
                     Price = item.Product.Price
                 };
                 order.OrderDetails.Add(orderDetail);
