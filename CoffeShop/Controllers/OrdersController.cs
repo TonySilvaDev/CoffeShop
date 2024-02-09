@@ -1,9 +1,11 @@
 ﻿using CoffeShop.Models;
 using CoffeShop.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoffeShop.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private IOrderRepository orderRepository;
